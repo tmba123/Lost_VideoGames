@@ -1,0 +1,52 @@
+﻿@page
+@model Lost_Videogames.Pages.WarehouseModel
+@{
+    ViewData["Title"] = "Warehouses";
+}
+
+<h1>Warehouses</h1>
+
+<form method="POST">
+    <input class="form-control" type="hidden" name="search" value="search" />
+    <select class="form-select " id="searchoption" name="searchoption">
+        <option value="">Choose search criteria </option>
+        <optgroup label="Criteria">
+            <option value="id_warehouse">Warehouse ID</option>
+            <option value="location">Location</option>
+            <option value="state">State</option>
+        </optgroup>
+    </select>
+    <p></p>
+    <input class="form-control" type="text" id="searchtext" name="searchtext" placeholder="option value" />
+    <p></p>
+    <input class="btn btn-primary" type="submit" value="Search" />
+</form>
+<p></p>
+<p></p>
+<table class="table table-striped table-hover" style="user-select:none">
+    <tr tr class="table-primary">
+        <th>Warehouse ID</th>
+        <th>Location</th>
+        <th>State</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Warehouses)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.id_warehouse)</td>
+            <td>@Html.DisplayFor(modelItem => item.location)</td>
+            <td>@Html.DisplayFor(modelItem => item.state)</td>
+            <td>
+                @if (item.id_warehouse != 1)
+                {
+                    <a class="btn btn-primary" href="/WarehouseUpdate?id_warehouse=@item.id_warehouse">Edit</a>
+                }
+            </td>
+        </tr>
+    }
+</table>
+
+<div>
+    <input class="btn btn-primary" type="button" value="Create New" onclick="window.location.href='/WarehouseCreate'" />
+</div>

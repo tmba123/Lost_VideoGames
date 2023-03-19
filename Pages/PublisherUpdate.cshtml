@@ -1,0 +1,71 @@
+﻿@page
+@model Lost_Videogames.Pages.PublisherUpdateModel
+@{
+    ViewData["Title"] = "Publishers";
+}
+
+<h2>Edit Publisher</h2>
+
+@if (Model.errorMessage.Length > 0)
+{
+    <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+        <strong>@Model.errorMessage</strong>
+        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+    </div>
+}
+
+<div class="d-flex justify-content-center align-items-center">
+
+         <form method="POST">
+            <input class="form-control" type="hidden" id="id_publisher" name="id_publisher" value="@Model.Publisher.id_publisher" />
+            <div class="form-group m-3">
+            <label for="id_publisher">Publisher ID</label>
+            <input class="form-control" type="text" value="@Model.Publisher.id_publisher" disabled/>
+            </div>
+
+            <div class="form-group m-3">
+            <label for="img_url">Box Art</label>
+            <input class="form-control" type="text" id="img_url" name="img_url" value="@Model.Publisher.img_url" />
+            </div>
+
+            <div class="form-group m-3">
+            <label for="name">Name</label>
+            <input class="form-control" type="text" id="name" name="name" value="@Model.Publisher.name" />
+            </div>
+
+            <div class="form-group m-3">
+            <label for="country">Country</label>
+            <input class="form-control" type="text" id="country" name="country" value="@Model.Publisher.country" />
+            </div>
+
+            <div class="form-group m-3">
+            <label for="year">Year</label>
+            <input class="form-control" type="text" id="year" name="year" value="@Model.Publisher.year" />
+            </div>
+
+            <div class="form-group m-3">
+            <label for="state">State</label>
+                <select class="form-select " id="state" name="state">
+                <option selected="@Model.Publisher.state">@Model.Publisher.state</option>
+                    <optgroup label="State">
+                        <option value="enabled">Enabled</option>
+                        <option value="disabled">Disabled</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <div class="d-flex justify-content-center m-3">
+                <input class="btn btn-primary" type="button" value="Back" onclick="window.location.href='/Publisher'" />
+                &nbsp;&nbsp;
+                <input class="btn btn-primary" type="submit" value="Save" onclick="return confirm('Confirm changes')" />
+            </div>
+        </form>
+</div>
+
+@if (Model.successMessage.Length > 0)
+{
+    <div class='alert alert-success alert-dismissible fade show' role='alert'>
+        <strong>@Model.successMessage</strong>
+        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+    </div>
+}

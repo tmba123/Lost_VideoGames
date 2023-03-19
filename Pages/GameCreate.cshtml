@@ -1,0 +1,77 @@
+﻿@page
+@model Lost_Videogames.Pages.GameCreateModel
+@{
+    ViewData["Title"] = "Games";
+}
+<h2>Add new Game</h2>
+
+
+@if (Model.errorMessage.Length > 0)
+{
+    <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+        <strong>@Model.errorMessage</strong>
+        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+    </div>
+}
+
+
+<div class="d-flex justify-content-center align-items-center">
+        <form method="POST">
+        <div class="form-group m-3">
+            <label for="selectpublisher">Publisher Name</label>
+            <select class="form-select" id="selectpublisher" name="selectpublisher">
+            <option value="">Choose Publisher</option>
+            <optgroup label="Publisher">
+            @foreach (var item in Model.PublishersEnabled)
+            {
+            <option value="@item.id_publisher">@Html.DisplayFor(modelItem => item.name)</option>
+            }
+            </optgroup>
+            </select>
+
+        </div>
+        <div class="form-group m-3">
+            <label for="img_url">Box Art</label>
+            <input class="form-control" type="text" id="img_url" name="img_url" value="/images/default.png" />
+        </div>
+        <div class="form-group m-3">
+            <label for="name">Name</label>
+            <input class="form-control" type="text" id="name" name="name" placeholder="Insert Game Name" />
+        </div>
+        <div class="form-group m-3">
+            <label for="genre">Genre</label>
+            <input class="form-control" type="text" id="genre" name="genre" placeholder="Insert Game Genre" />
+        </div>
+        <div class="form-group m-3">
+            <label for="platform">Platform</label>
+            <input class="form-control" type="text" id="platform" name="platform" placeholder="Insert Game patform" />
+        </div>
+        <div class="form-group m-3">
+            <label for="release_year">Release Year</label>
+            <input class="form-control" type="text" id="release_year" name="release_year" placeholder="Insert Game Year" />
+        </div>
+        <div class="form-group m-3">
+            <label for="state">State</label>
+            <select class="form-select" id="state" name="state">
+                <option value="">Choose State</option>
+                <optgroup label="State">
+                    <option value="enabled">Enabled</option>
+                    <option value="disabled">Disabled</option>
+                </optgroup>
+            </select>
+        </div>
+        <div class="d-flex justify-content-center m-3">
+            <input class="btn btn-primary" type="button" value="Back" onclick="window.location.href='/Game'" />
+            &nbsp;&nbsp;
+            <input class="btn btn-primary" type="submit" value="Create" onclick="return confirm('Confirm create Game')" />
+        </div>
+        </form>
+</div>
+
+@if (Model.successMessage.Length > 0)
+{
+    <div class='alert alert-success alert-dismissible fade show' role='alert'>
+        <strong>@Model.successMessage</strong>
+        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+    </div>
+}
