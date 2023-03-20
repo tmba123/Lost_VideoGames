@@ -10,7 +10,7 @@ namespace Lost_Videogames.Pages
         public string errorMessage = ""; //Variável para apresentação de erros na pagina .cshtm
 
         [BindProperty]
-        public IEnumerable<Publisher> Publishers { get; set; }
+        public IEnumerable<Publisher> Publishers { get; set; } //IEnumerable para lista de Publishers
         public void OnGet()
         {   
             LostGamesContext context = new LostGamesContext(); //Context ligação entre o .Net e base de dados MySQL
@@ -27,11 +27,10 @@ namespace Lost_Videogames.Pages
             try
             {
 
-                if (Request.Form["search"].Equals("search")) 
-                {
-                    //Chama o método search para apresentar os resultados filtrados com as opções selecionadas pelo utilizador
-                    this.Publishers = context.SearchPublishers(Request.Form["searchoption"], Request.Form["searchtext"]);
-                }
+               
+                //Chama o método search para apresentar os resultados filtrados com as opções selecionadas pelo utilizador
+                this.Publishers = context.SearchPublishers(Request.Form["searchoption"], Request.Form["searchtext"]);
+               
 
 
             } catch (Exception ex)

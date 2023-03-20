@@ -6,13 +6,16 @@ namespace Lost_Videogames.Pages
 {
     public class GameModel : PageModel
     {
-        public string errorMessage = "";
+        public string errorMessage = ""; //Variável para apresentação de erros na pagina .cshtm
 
         [BindProperty]
-        public IEnumerable<Game> Games { get; set; }
+        public IEnumerable<Game> Games { get; set; } //IEnumerable para lista de Games
         public void OnGet()
         {
-            LostGamesContext context = new LostGamesContext();
+            LostGamesContext context = new LostGamesContext();//Context ligação entre o .Net e base de dados MySQL
+
+            //Preenche a lista Games com a informação presente na base de dados.
+            //Esta lista vai ser utilizada no .cshtml para mostrar a tabela de resultados ao utilizador
             Games = context.GetAllGames();
         }
 
@@ -23,10 +26,9 @@ namespace Lost_Videogames.Pages
             try
             {
 
-                if (Request.Form["search"].Equals("search"))
-                {
-                    this.Games = context.SearchGames(Request.Form["searchoption"], Request.Form["searchtext"]);
-                }
+                //Chama o método search para apresentar os resultados filtrados com as opções selecionadas pelo utilizador
+                this.Games = context.SearchGames(Request.Form["searchoption"], Request.Form["searchtext"]);
+                
 
 
             }
