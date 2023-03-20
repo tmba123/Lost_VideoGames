@@ -7,18 +7,22 @@ namespace Lost_Videogames.Pages
 {
     public class GameCreateModel : PageModel
     {
-        public string errorMessage = "";
-        public string successMessage = "";
+        public string errorMessage = ""; //Variável para apresentação de erros na pagina .cshtm
+        public string successMessage = ""; //Variável para apresentação de success na pagina .cshtm
 
-        public List<Publisher> PublishersEnabled = new List<Publisher>();
+        public List<Publisher> PublishersEnabled = new List<Publisher>(); //Lista de Publishers
         public void OnGet()
         {
-            LostGamesContext context = new LostGamesContext();
+            LostGamesContext context = new LostGamesContext();//Context ligação entre o .Net e base de dados MySQL
+
+            //Pesquisa de publishers no estado enabled
             PublishersEnabled = context.SearchPublishers("state", "enabled");
 
         }
         public void OnPost()
         {
+            //Verifica que se todos os campos do formulário estão preenchidos,
+            //mensagem de erro no caso de faltar algum campo
             if (
                 Request.Form["selectpublisher"] == "" ||
                 Request.Form["img_url"] == "" ||
@@ -36,6 +40,8 @@ namespace Lost_Videogames.Pages
             LostGamesContext context = new LostGamesContext();
             try
             {
+                //Cria objeto Game com os dados do formulário
+                //e faz Insert dos novos dados na base de dados
 
                 Game game = new Game();
         
@@ -47,7 +53,7 @@ namespace Lost_Videogames.Pages
                 game.release_year = Int32.Parse(Request.Form["release_year"]);
                 game.state = Request.Form["state"];
                 
-                context.CreateGames(game);
+                context.CreateGames(game); //Game Insert na base de dados
             }
             catch (Exception ex)
             {
@@ -56,7 +62,7 @@ namespace Lost_Videogames.Pages
                 return;
             }
 
-            successMessage = "Game created successfully";
+            successMessage = "Game created successfully"; //Apresenta mensagem de sucesso no caso do try = true
             OnGet();
         }
     }

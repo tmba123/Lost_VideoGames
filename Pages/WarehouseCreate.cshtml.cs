@@ -6,14 +6,16 @@ namespace Lost_Videogames.Pages
 {
     public class WarehouseCreateModel : PageModel
     {
-        public string errorMessage = "";
-        public string successMessage = "";
+        public string errorMessage = ""; //Variável para apresentação de erros na pagina .cshtm
+        public string successMessage = ""; //Variável para apresentação de success na pagina .cshtm
         public void OnGet()
         {
 
         }
         public void OnPost()
         {
+            //Verifica que se todos os campos do formulário estão preenchidos,
+            //mensagem de erro no caso de faltar algum campo
             if (Request.Form["location"] == "" ||
                 Request.Form["state"] == "")
             {
@@ -22,15 +24,17 @@ namespace Lost_Videogames.Pages
                 return;
 
             }
-            LostGamesContext context = new LostGamesContext();
+            LostGamesContext context = new LostGamesContext(); //Context ligação entre o .Net e base de dados MySQL
             try
             {
-
+                //Cria objeto Warehouse com os dados do formulário
+                //e faz Insert dos novos dados na base de dados
                 Warehouse warehouse = new Warehouse();
 
                 warehouse.location = Request.Form["location"];
                 warehouse.state = Request.Form["state"];
-                context.CreateWarehouses(warehouse);
+
+                context.CreateWarehouses(warehouse); //Warehouse Insert na base de dados
             }
             catch (Exception ex)
             {
@@ -39,7 +43,7 @@ namespace Lost_Videogames.Pages
                 return;
             }
 
-            successMessage = "Warehouse created successfully";
+            successMessage = "Warehouse created successfully"; //Apresenta mensagem de sucesso no caso do try = true
             OnGet();
         }
 

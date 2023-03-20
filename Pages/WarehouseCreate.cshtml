@@ -6,7 +6,7 @@
 <h2>Add new Warehouse</h2>
 
 
-@if (Model.errorMessage.Length > 0)
+@if (Model.errorMessage.Length > 0)@*Verifica se existe mensagem de erro para apresentar ao utilizador*@
 {
     <div class='alert alert-warning alert-dismissible fade show' role='alert'>
         <strong>@Model.errorMessage</strong>
@@ -38,7 +38,7 @@
     </form>
 </div>
 
-@if (Model.successMessage.Length > 0)
+@if (Model.successMessage.Length > 0)@*Verifica se existe mensagem de sucesso para apresentar ao utilizador*@
 {
     <div class='alert alert-success alert-dismissible fade show' role='alert'>
         <strong>@Model.successMessage</strong>

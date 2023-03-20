@@ -6,7 +6,7 @@
 <h2>Add new Game</h2>
 
 
-@if (Model.errorMessage.Length > 0)
+@if (Model.errorMessage.Length > 0)@*Verifica se existe mensagem de erro para apresentar ao utilizador*@
 {
     <div class='alert alert-warning alert-dismissible fade show' role='alert'>
         <strong>@Model.errorMessage</strong>
@@ -22,7 +22,7 @@
             <select class="form-select" id="selectpublisher" name="selectpublisher">
             <option value="">Choose Publisher</option>
             <optgroup label="Publisher">
-            @foreach (var item in Model.PublishersEnabled)
+            @foreach (var item in Model.PublishersEnabled) @*Lista apenas publishers no estado enabled*@
             {
             <option value="@item.id_publisher">@Html.DisplayFor(modelItem => item.name)</option>
             }
@@ -68,7 +68,7 @@
         </form>
 </div>
 
-@if (Model.successMessage.Length > 0)
+@if (Model.successMessage.Length > 0)@*Verifica se existe mensagem de sucesso para apresentar ao utilizador*@
 {
     <div class='alert alert-success alert-dismissible fade show' role='alert'>
         <strong>@Model.successMessage</strong>

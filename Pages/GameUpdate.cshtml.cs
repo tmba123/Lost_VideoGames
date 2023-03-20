@@ -22,7 +22,7 @@ namespace Lost_Videogames.Pages
             //Pesquisa de Game através do id_game submetido na Query parameter da página Game
             Game = context.SearchGames("id_game", Request.Query["id_game"]).First();
 
-            //Pesquisa de publishers no apenas no estado enabled
+            //Pesquisa de publishers no estado enabled
             PublishersEnabled = context.SearchPublishers("state", "enabled");
         }
 
