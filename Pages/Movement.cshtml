@@ -5,7 +5,7 @@ ViewData["Title"] = "Movements";
 }
 <h1>Movements</h1>
 
-@if (Model.errorMessage.Length > 0)
+@if (Model.errorMessage.Length > 0))@*Verifica se existe mensagem de erro para apresentar ao utilizador*@
 {
 <div class='alert alert-warning alert-dismissible fade show' role='alert'>
     <strong>@Model.errorMessage</strong>
