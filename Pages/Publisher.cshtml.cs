@@ -7,13 +7,16 @@ namespace Lost_Videogames.Pages
     
     public class PublisherModel : PageModel
     {
-        public string errorMessage = "";
+        public string errorMessage = ""; //Variável para apresentação de erros na pagina .cshtm
 
         [BindProperty]
         public IEnumerable<Publisher> Publishers { get; set; }
         public void OnGet()
-        {
-            LostGamesContext context = new LostGamesContext();
+        {   
+            LostGamesContext context = new LostGamesContext(); //Context ligação entre o .Net e base de dados MySQL
+            
+            //Preenche a lista Publishers com a informação presente na base de dados.
+            //Esta lista vai ser utilizada no .cshtml para mostrar a tabela de resultados ao utilizador
             Publishers = context.GetAllPublishers();
         }
 
@@ -24,8 +27,9 @@ namespace Lost_Videogames.Pages
             try
             {
 
-                if (Request.Form["search"].Equals("search"))
+                if (Request.Form["search"].Equals("search")) 
                 {
+                    //Chama o método search para apresentar os resultados filtrados com as opções selecionadas pelo utilizador
                     this.Publishers = context.SearchPublishers(Request.Form["searchoption"], Request.Form["searchtext"]);
                 }
 

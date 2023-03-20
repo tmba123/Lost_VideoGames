@@ -53,10 +53,25 @@ namespace Lost_Videogames.Pages
                     return;
 
                 }
+
+            }
+
+            PublishersEnabled = context.GetAllPublishers();
+
+            foreach (var item in PublishersEnabled)
+            {
+                if (Request.Form["state"] == "enabled" && Int32.Parse(Request.Form["selectpublisher"]) == item.id_publisher && item.state == "disabled")
+                {
+                    errorMessage = "Publisher for this game is disabled! Cannot be enabled.";
+                    OnGet();
+                    return;
+
+                }
+
             }
 
 
-            try
+                try
             {
                 Game game = new Game()
                 {

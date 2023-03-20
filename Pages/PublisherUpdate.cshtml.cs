@@ -40,7 +40,7 @@ namespace Lost_Videogames.Pages
 
             foreach (var item in Games)
             {
-                if (Request.Form["state"] == "disabled" && Int32.Parse(Request.Form["id_publisher"]) == item.id_publisher)
+                if (Request.Form["state"] == "disabled" && Int32.Parse(Request.Form["id_publisher"]) == item.id_publisher && item.state == "enabled")
                 {
                     errorMessage = "This Publisher contains products! Cannot be disabled.";
                     OnGet();
